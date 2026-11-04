@@ -35,3 +35,41 @@ export const  getCreatorsFrom=(series, country)=>{
 export const sortByStartYear=(series)=>{
     return series.map(show=>show).sort((a,b)=>a.startYear-b.startYear)
 };
+
+export const renameSeries=(series, id, newTitle)=>{
+    return series.map(i=>{
+        if(i.id==id)
+
+            return {...i,title:newTitle};
+        else
+       return i;
+})
+};
+
+export const addSeason=(series, showId, season)=>{
+    return series.map(i=>{
+        if(i.id==showId)
+            return {...i, seasons: [...i.seasons, season]};
+        else
+            return i;
+    })
+};
+
+
+export const addEpisode = (series, showId, seasonNumber, episode) => {
+    return series.map(movie => {
+        if (movie.id == showId) {
+            const seasons = [...movie.seasons];
+            const index = seasonNumber - 1;
+
+            seasons[index] = {
+                ...seasons[index],
+                episodes: [...seasons[index].episodes, episode]
+            };
+
+            return { ...movie, seasons };
+        }
+
+        return movie;
+    });
+};
