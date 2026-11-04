@@ -4,7 +4,15 @@ export const getEpisodeById = (season, idText) =>
   season.episodes.find(episode => episode.id == idText);
 
 export const addEpisodeToFirstSeason = (show, episode) => {
-  const firstSeason = show.seasons[0];
-  firstSeason.episodes.push(episode);
-  return { ...show };
+    const firstSeason = show.seasons[0];
+
+    const newFirstSeason = {
+        ...firstSeason,
+        episodes: [...firstSeason.episodes, episode]
+    };
+
+    return {
+        ...show,
+        seasons: [newFirstSeason, ...show.seasons.slice(1)]
+    };
 };
